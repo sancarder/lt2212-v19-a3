@@ -23,15 +23,15 @@ The accuracy measures were lower than I expected. But since logistic regression 
 
 | Command                                                               | Output of test.py      |
 |-----------------------------------------------------------------------|------------------------|
-| gendata.py /scratch/brown-rga.txt browndata1.txt -N 2 -E 2500 -T 600	| Accuracy:              |
-| gendata.py /scratch/brown-rga.txt browndata2.txt -N 2 -E 5000 -T 1200	| Accuracy:              |
-| gendata.py /scratch/brown-rga.txt browndata3.txt -N 2 -T 2400         | Accuracy:              |
-| gendata.py /scratch/brown-rga.txt browndata4.txt -N 3 -E 2500 -T 600 	| Accuracy:              |
-| gendata.py /scratch/brown-rga.txt browndata5.txt -N 3 -E 5000 -T 1200 | Accuracy:              |
-| gendata.py /scratch/brown-rga.txt browndata6.txt -N 3 -T 2400         | Accuracy:              |
-| gendata.py /scratch/brown-rga.txt browndata7.txt -N 4 -E 2500 -T 600  | Accuracy:              |
-| gendata.py /scratch/brown-rga.txt browndata8.txt -N 4 -E 5000 -T 1200 | Accuracy:              |
-| gendata.py /scratch/brown-rga.txt browndata9.txt -N 4 -T 2400         | Accuracy:              |
+| python gendata.py /scratch/brown_rga.txt browndata1.txt -N 2 -E 2500 -T 600  | Accuracy:              |
+| python gendata.py /scratch/brown_rga.txt browndata2.txt -N 2 -E 5000 -T 1200 | Accuracy:              |
+| python gendata.py /scratch/brown_rga.txt browndata3.txt -N 2 -T 2400         | Accuracy:              |
+| python gendata.py /scratch/brown_rga.txt browndata4.txt -N 3 -E 2500 -T 600  | Accuracy:              |
+| python gendata.py /scratch/brown_rga.txt browndata5.txt -N 3 -E 5000 -T 1200 | Accuracy:              |
+| python gendata.py /scratch/brown_rga.txt browndata6.txt -N 3 -T 2400         | Accuracy:              |
+| python gendata.py /scratch/brown_rga.txt browndata7.txt -N 4 -E 2500 -T 600  | Accuracy:              |
+| python gendata.py /scratch/brown_rga.txt browndata8.txt -N 4 -E 5000 -T 1200 | Accuracy:              |
+| python gendata.py /scratch/brown_rga.txt browndata9.txt -N 4 -T 2400         | Accuracy:              |
 
 
 ## Reporting for Part Bonus 
