@@ -20,17 +20,17 @@ For the sake of consistency, I started from line 0 each time.
 The accuracy measures were lower than I expected. But since logistic regression modeling isn't particulary suited for many classes, it is perhaps to be expected. The data, while not very large, still created a large amount of class labels out of its vocabulary. Finding a pattern and correctly predicting the right one would require much more data, and/or fewer labels to choose from. 
 
 
-| Command                                                                     | Output of test.py |
-|-----------------------------------------------------------------------------|-------------------|
-| python gendata.py /scratch/brown_rga.txt browndata1.txt -N 2 -E 2000 -T 500 | Accuracy:         |
-| python gendata.py /scratch/brown_rga.txt browndata2.txt -N 2 -E 1000 -T 250 | Accuracy:         |
-| python gendata.py /scratch/brown_rga.txt browndata3.txt -N 2 -E 200  -T 50  | Accuracy:         |
-| python gendata.py /scratch/brown_rga.txt browndata4.txt -N 3 -E 2000 -T 500 | Accuracy:         |
-| python gendata.py /scratch/brown_rga.txt browndata5.txt -N 3 -E 1000 -T 250 | Accuracy:         |
-| python gendata.py /scratch/brown_rga.txt browndata6.txt -N 3 -E 250  -T 50  | Accuracy:         |
-| python gendata.py /scratch/brown_rga.txt browndata7.txt -N 4 -E 2000 -T 500 | Accuracy:         |
-| python gendata.py /scratch/brown_rga.txt browndata8.txt -N 4 -E 1000 -T 250 | Accuracy:         |
-| python gendata.py /scratch/brown_rga.txt browndata9.txt -N 4 -E 250  -T 50  | Accuracy:         |
+| Command                                                                     | Accuracy              | Perplexity       |
+|-----------------------------------------------------------------------------|-----------------------|------------------|
+| python gendata.py /scratch/brown_rga.txt browndata1.txt -N 2 -E 2000 -T 500 |                       |                  |
+| python gendata.py /scratch/brown_rga.txt browndata2.txt -N 2 -E 1000 -T 250 |0.00034048348655090226 |1.001318127352163 |
+| python gendata.py /scratch/brown_rga.txt browndata3.txt -N 2 -E 200  -T 50  |0.04497354497354497    |1.003870367760895 |
+| python gendata.py /scratch/brown_rga.txt browndata4.txt -N 3 -E 2000 -T 500 |                       |                  |
+| python gendata.py /scratch/brown_rga.txt browndata5.txt -N 3 -E 1000 -T 250 |0.05487261713878496    |1.0013080871442723|
+| python gendata.py /scratch/brown_rga.txt browndata6.txt -N 3 -E 250  -T 50  |                       |                  |
+| python gendata.py /scratch/brown_rga.txt browndata7.txt -N 4 -E 2000 -T 500 |                       |                  |
+| python gendata.py /scratch/brown_rga.txt browndata8.txt -N 4 -E 1000 -T 250 |                       |                  |
+| python gendata.py /scratch/brown_rga.txt browndata9.txt -N 4 -E 250  -T 50  |                       |                  |
 
 
 ## Reporting for Part Bonus 
