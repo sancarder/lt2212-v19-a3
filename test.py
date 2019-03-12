@@ -33,7 +33,7 @@ def test_model(model, features, labels):
     #Predict labels
     predicted_classes = model.predict(features)    
     for i in range(len(features)):
-        #print("N-gram: {}, Predicted: {}, Real: {}".format(features.values[i], predicted_classes.values[i], labels[i]))
+        print("N-gram: {}, Predicted: {}, Real: {}".format(features.values[i], predicted_classes.values[i], labels[i]))
 
     #Get predicted log probabilities
     predicted_logs = model.predict_log_proba(features)
@@ -42,8 +42,8 @@ def test_model(model, features, labels):
     predicted_probas = model.predict_proba(features)
 
     #Calculate entropy and perplexity on the probability distribution
-    entropy = calculate_entropy(predicted_probas, predicted_logs)
-    perplexity = calculate_perplexity(entropy)
+    crossentropy = calculate_crossentropy(predicted_probas, predicted_logs)
+    perplexity = calculate_perplexity(crossentropy)
     
     #Calculate accuracy
     accuracy = model.score(features, labels)
@@ -51,10 +51,11 @@ def test_model(model, features, labels):
     return accuracy, perplexity
 
 
-def calculate_entropy(probs, logs):
+def calculate_crossentropy(probs, logs):
 
-    #Calculates the entropy of a probability distribution
+    #Calculates the cross entropy of a probability distribution
     #The probability distribution is all probabilities for all ngrams
+    #It is then divided with 1/N
         
     values = []
 
@@ -64,16 +65,19 @@ def calculate_entropy(probs, logs):
             values.append(probs[i][j] * logs[i][j]) #p * l
 
     #Sum the calculations
-    entropy = -sum(values)
+    pp_sum = -sum(values)
+
+    #Multiply the sum with 1/N
+    crossentropy = (1/len(values))*pp_sum
     
-    return entropy
+    return crossentropy
 
 
 def calculate_perplexity(entropy):
 
     #Calculate perplexity by raising the power of the entropy
     perplexity = np.power(2, entropy)
-
+    
     return perplexity
 
 
@@ -102,4 +106,5 @@ if __name__ == "__main__":
     #print("Testing {}-gram model.".format(args.ngram))                                                                                                                         
     accuracy, perplexity = test_model(model, features, labels)
 
-    print("Accuracy is: ".format(accuracy))                                                                                                                                             print("Perplexity is: ".format(perplexity)) 
+    print("Accuracy is: {}".format(accuracy))
+    print("Perplexity is: {}".format(perplexity)) 
