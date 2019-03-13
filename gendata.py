@@ -144,7 +144,7 @@ def print_feature_table(outputfile, arrays, ngrams, datatype):
     
     #Prints to file                                                                                                                                                           
     with open(outputfile, 'w') as out:
-        pdframe.to_csv(out, encoding="utf-8", columns=None)
+        pdframe.to_csv(out, encoding="utf-8", header=None, index=None)
     
 
 def parse_arguments(parser):
