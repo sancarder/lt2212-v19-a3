@@ -32,8 +32,8 @@ def test_model(model, features, labels):
 
     #Predict labels
     predicted_classes = model.predict(features)    
-    for i in range(len(features)):
-        print("N-gram: {}, Predicted: {}, Real: {}".format(features.values[i], predicted_classes.values[i], labels[i]))
+    #for i in range(len(features)):
+        #print("N-gram: {}, Predicted: {}, Real: {}".format(features.values[i], predicted_classes.values[i], labels[i]))
 
     #Get predicted log probabilities
     predicted_logs = model.predict_log_proba(features)
