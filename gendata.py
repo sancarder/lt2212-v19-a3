@@ -49,17 +49,21 @@ def prepare_data(lines, startline, endline, testnumber):
     return corpus_lines, training_lines, test_lines       
 
 
-def lines_to_words(lines):
+def lines_to_tokens(lines):
 
     words = []
+    tags = []
+    pairs = []
 
     #Using NLTK to tokenize the sentence and strip the tags
     for line in lines:
         for pair in line.split():
             word, tag = nltk.tag.str2tuple(pair)
             words.append(word)
-                    
-    return words
+            tags.append(tag)
+            pairs.append(pair)
+                
+    return words, tags, pairs
 
 
 def create_vocabulary(words):
@@ -96,14 +100,22 @@ def one_hot_transform(vocabulary):
     return onehots
 
 
-def produce_features(ngrams, onehots):
+def produce_features(ngrams, onehots, tag_ngrams, labeltype):
 
     vectors = []
 
-    for gram in ngrams:
+    for i in range (len(ngrams)):
 
+        gram = ngrams[i]
+        tag_gram = tag_ngrams[i]
+        
+        #Get label as word or tag
+        if labeltype == 'tags':
+            label = tag_gram[-1]
+        else:
+            label = gram[-1]
+        
         #Get one hot vectors for all word but the last
-        label = gram[-1]
         ohv_list = []
         for g in gram[:-1]:
             ohv_list.append(onehots[g])
@@ -151,6 +163,8 @@ def parse_arguments(parser):
     parser.add_argument("-E", "--end", metavar="E", dest="endline", type=int, default=None, help="What line of the input data file to end on. Default is None, the last line.")
     parser.add_argument("outputfile", type=str, help="The name of the output file for the feature table.")
     parser.add_argument("-T", "--lines", metavar="T", dest="testlines", type=int, default=None, help="The number of lines assigned to test data (default None).")
+    parser.add_argument("-L", "--label", metavar="L", dest="label", type=str, default="words", help="The type of label to classify (words or tags) (default words).")
+    parser.add_argument("-F", "--features", metavar="F", dest="features", type=str, default="words", help="The type of features to model on (words or pairs) (default words).")
 
     return parser.parse_args()
 
@@ -174,16 +188,16 @@ if __name__ == "__main__":
         ngram_cond = False
         print("The ngram needs to be at least 2. Try again. ")
         
-    if args.startline > len(lines) or args.startline > args.endline:
+    if args.startline > len(lines):
         startline_cond = False
         print("The files have too few lines or your starting point occurs later than your end point. Try again.")
 
     if args.endline:
-        if args.endline > len(lines):
+        if args.endline > len(lines) or args.startline > args.endline:
             endline_cond = False
             print("The files have too few lines to end at this line. Try again.")
 
-    if args.testlines:
+    if args.testlines and args.endline:
         if args.testlines > (args.endline-args.startline):
             testline_cond = False
             print("Your test set can't be larger than the total set")
@@ -196,24 +210,39 @@ if __name__ == "__main__":
         corpus_lines, training_lines, test_lines = prepare_data(lines, args.startline, args.endline, args.testlines)
 
         #Tokenize each set
-        corpus_words = lines_to_words(corpus_lines)
-        training_words = lines_to_words(training_lines)
-        test_words = lines_to_words(test_lines)
+        corpus_tokens, corpus_tags, corpus_pairs = lines_to_tokens(corpus_lines)
+        training_tokens, training_tags, training_pairs = lines_to_tokens(training_lines)
+        test_tokens, test_tags, test_pairs = lines_to_tokens(test_lines)
 
         #Creating ngrams for training and test sets with a start symbol on the far right
-        training_ngrams = list(ngrams(training_words, args.ngram, pad_left=True, left_pad_symbol='<start>'))
-        test_ngrams = list(ngrams(test_words, args.ngram, pad_left=True, left_pad_symbol='<start>'))
+        training_token_ngrams = list(ngrams(training_tokens, args.ngram, pad_left=True, left_pad_symbol='<start>'))
+        training_tag_ngrams = list(ngrams(training_tags, args.ngram, pad_left=True, left_pad_symbol='<start>'))
+        training_pair_ngrams = list(ngrams(training_pairs, args.ngram, pad_left=True, left_pad_symbol='<start>'))
+        test_token_ngrams = list(ngrams(test_tokens, args.ngram, pad_left=True, left_pad_symbol='<start>'))
+        test_tag_ngrams = list(ngrams(test_tags, args.ngram, pad_left=True, left_pad_symbol='<start>'))
+        test_pair_ngrams = list(ngrams(test_pairs, args.ngram, pad_left=True, left_pad_symbol='<start>'))
 
         #Create vocabulary and one hot vectors for the corpus
-        vocabulary = create_vocabulary(corpus_words)
+        if args.features == 'pairs':
+            vocab_data = corpus_pairs
+            training_ngrams = training_pair_ngrams
+            test_ngrams = test_pair_ngrams
+
+        else:
+            vocab_data = corpus_tokens
+            training_ngrams = training_token_ngrams
+            test_ngrams = test_token_ngrams            
+
+            
+        vocabulary = create_vocabulary(vocab_data)
         onehots = one_hot_transform(vocabulary)
 
         #Produce features for sets
-        print("Constructing {}-gram model for training data with {} words".format(args.ngram, len(training_words)))
-        training_data = produce_features(training_ngrams, onehots)
+        print("Constructing {}-gram model for training data with {} tokens".format(args.ngram, len(training_tokens)))
+        training_data = produce_features(training_ngrams, onehots, training_tag_ngrams, args.label)
         
-        print("Constructing {}-gram model for test data with {} words".format(args.ngram, len(test_words)))
-        test_data = produce_features(test_ngrams, onehots)
+        print("Constructing {}-gram model for test data with {} tokens".format(args.ngram, len(test_tokens)))
+        test_data = produce_features(test_ngrams, onehots, test_tag_ngrams, args.label)
 
         #Write sets to file
         print("Writing table to training file")
