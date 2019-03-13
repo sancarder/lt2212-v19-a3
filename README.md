@@ -9,6 +9,8 @@ My name: Sandra Derbring
 Document here additional command-line instructions or other details you
 want us to know about running your code.
 
+To run the code, the flags -S, -E, -N and -T are implemented as requested. It is also possible to run flags to choose tags as class labels or word/tag pairs as features, as asked for in the bonus part. The flag [-L tags] outputs the labels as tags. The flag [-F pairs] uses the word/tag pair as features instead of words (and outputs them as labels, if not the -L flag is used). 
+
 ## Reporting for Part 4
 
 My initial hypothesis was that the larger the selected set, the higher accuracy and the lower perplexity. But while running small tests to test the code, I realized that the accuracies were very low. My hypothesis then adjusted a little bit. Since the data is relatively small and there are so many labels, the changes in set selections and ngrams won't matter as much as I initially thought. 
@@ -35,4 +37,5 @@ The accuracy measures were lower than I expected. But since logistic regression 
 
 ## Reporting for Part Bonus 
 
-(Delete if you aren't doing the bonus.)
+See explanation above about how the optional flags are used for outputting tags and using word/tag pairs as labels.
+Using tags as the class labels gives a significant higher accuracy since there are fewer tags than unique words. 
