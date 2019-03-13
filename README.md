@@ -45,14 +45,15 @@ Using tags as the class labels gives a significant higher accuracy since there a
 | python gendata.py /scratch/brown_rga.txt 1.txt -N 2 -E 2000 -T 500 -F pairs -L tags |                                         
 | python gendata.py /scratch/brown_rga.txt 2.txt -N 2 -E 1000 -T 250 -F pairs -L tags | 
 | python gendata.py /scratch/brown_rga.txt 3.txt -N 2 -E 200  -T 50 -F pairs -L tags  | 0.26634615384615384  | 64.46660070570107 |
+| python gendata.py /scratch/brown_rga.txt 4.txt -N 3 -E 2000 -T 500 -F pairs -L tags |                                         
+| python gendata.py /scratch/brown_rga.txt 5.txt -N 3 -E 1000 -T 250 -F pairs -L tags |
+| python gendata.py /scratch/brown_rga.txt 6.txt -N 3 -E 250  -T 50 -F pairs -L tags  | 0.2451669595782074   | 70.992226710265   |
+
 
 
 
 | Command                                                                             | Accuracy             | Perplexity        |
-|------------------------------------------------------------------------------------------------------------|-------------------|
-| python gendata.py /scratch/brown_rga.txt 1.txt -N 2 -E 2000 -T 500 -F pairs -L tags |                                         
-| python gendata.py /scratch/brown_rga.txt 2.txt -N 2 -E 1000 -T 250 -F pairs -L tags |
-| python gendata.py /scratch/brown_rga.txt 3.txt -N 2 -E 200  -T 50 -F pairs -L tags  | 0.26634615384615384  | 64.46660070570107 |    
+|------------------------------------------------------------------------------------------------------------|-------------------| 
 | python gendata.py /scratch/brown_rga.txt 4.txt -N 3 -E 2000 -T 500 -F pairs -L tags |                                         
 | python gendata.py /scratch/brown_rga.txt 5.txt -N 3 -E 1000 -T 250 -F pairs -L tags |    
 | python gendata.py /scratch/brown_rga.txt 6.txt -N 3 -E 250  -T 50 -F pairs -L tags  | 0.2451669595782074   | 70.992226710265   |
