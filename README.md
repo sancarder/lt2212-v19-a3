@@ -40,6 +40,13 @@ The accuracy measures were lower than I expected. But since logistic regression 
 See explanation above about how the optional flags are used for outputting tags and using word/tag pairs as labels.
 Using tags as the class labels gives a significant higher accuracy since there are fewer tags than unique words.
 
+| Command                                                                     | Accuracy             | Perplexity        |
+|-----------------------------------------------------------------------------|----------------------|-------------------|
+| python gendata.py /scratch/brown_rga.txt browndata1.txt -N 2 -E 2000 -T 500 |                                         
+| python gendata.py /scratch/brown_rga.txt browndata2.txt -N 2 -E 1000 -T 250 | 
+| python gendata.py /scratch/brown_rga.txt browndata3.txt -N 2 -E 200  -T 50  | 0.1144               | 211.6655519438415
+
+
 
 | Command                                                                             | Accuracy             | Perplexity        |
 |------------------------------------------------------------------------------------------------------------|-------------------|
