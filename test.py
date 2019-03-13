@@ -3,6 +3,7 @@ import argparse
 import numpy as np
 import pandas as pd
 import pickle
+import types
 from sklearn.linear_model import LogisticRegression
 
 # test.py -- Don't forget to put a reasonable amount code comments
@@ -28,8 +29,9 @@ def load_data(datafile):
 def test_model(model, features, labels):
     
     #Sets the classes_ attribute to the known labels
-    setattr(model, 'classes_', labels)
-
+    #This should not be done, it gives wrong data to classes_
+    #setattr(model, 'classes_', labels)
+    
     #Predict labels
     predicted_classes = model.predict(features)    
     #for i in range(len(features)):
@@ -40,35 +42,46 @@ def test_model(model, features, labels):
     
     #Get predicted probabilities
     predicted_probas = model.predict_proba(features)
-
+    
     #Calculate entropy and perplexity on the probability distribution
     crossentropy = calculate_crossentropy(predicted_probas, predicted_logs)
     perplexity = calculate_perplexity(crossentropy)
     
     #Calculate accuracy
     accuracy = model.score(features, labels)
-        
+    
     return accuracy, perplexity
 
 
-def calculate_crossentropy(probs, logs):
+def calculate_crossentropy(probs, log_probas):
 
     #Calculates the cross entropy of a probability distribution
-    #The probability distribution is all probabilities for all ngrams
+    #The probability distribution is all (log) probabilities for all ngrams
     #It is then divided with 1/N
         
     values = []
 
+    #Old code, cross-entropy by the book:
     #Multiply each probability measure with its log probability
-    for i in range(len(probs)):
-        for j in range(len(probs[i])):
-            values.append(probs[i][j] * logs[i][j]) #p * l
-
+    #for i in range(len(probs)):
+     #   for j in range(len(probs[i])):
+      #      values.append(probs[i][j] * logs[i][j]) #p * l            
+      
     #Sum the calculations
-    pp_sum = -sum(values)
+    #pp_sum = -sum(values)
 
     #Multiply the sum with 1/N
-    crossentropy = (1/len(values))*pp_sum
+    #crossentropy = (1/n)*pp_sum
+
+    #2 -1/n * sum of log for i, for all i
+    #New try, just sum the logs for all samples, by Wikipedia:
+    for sample in log_probas:
+        for log in sample:
+            values.append(log)
+
+    n = len(values)            
+    logsum = sum(values)
+    crossentropy = -(1/n) * logsum
     
     return crossentropy
 
