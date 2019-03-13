@@ -25,8 +25,8 @@ The accuracy measures were lower than I expected. But since logistic regression 
 | Command                                                                     | Accuracy             | Perplexity        |
 |-----------------------------------------------------------------------------|----------------------|-------------------|
 | python gendata.py /scratch/brown_rga.txt browndata1.txt -N 2 -E 2000 -T 500 |                                         
-| python gendata.py /scratch/brown_rga.txt browndata2.txt -N 2 -E 1000 -T 250 | 
-| python gendata.py /scratch/brown_rga.txt browndata3.txt -N 2 -E 200  -T 50  | 0.1144               | 211.6655519438415
+| python gendata.py /scratch/brown_rga.txt browndata2.txt -N 2 -E 1000 -T 250 | 0.13369254083178986  | 649.0675311467971 |
+| python gendata.py /scratch/brown_rga.txt browndata3.txt -N 2 -E 200  -T 50  | 0.1144               | 211.6655519438415 |
 | python gendata.py /scratch/brown_rga.txt browndata4.txt -N 3 -E 2000 -T 500 |                                         
 | python gendata.py /scratch/brown_rga.txt browndata5.txt -N 3 -E 1000 -T 250 |
 | python gendata.py /scratch/brown_rga.txt browndata6.txt -N 3 -E 200  -T 50  | 0.12172442941673711  | 218.9950553462103 |
@@ -43,7 +43,7 @@ Using tags as the class labels gives a significant higher accuracy since there a
 | Command                                                                                             | Accuracy             | Perplexity        |
 |-----------------------------------------------------------------------------------------------------|----------------------|-------------------|
 | python gendata.py /scratch/brown_rga.txt tagged_browndata1.txt -N 2 -E 2000 -T 500 -F pairs -L tags |                                         
-| python gendata.py /scratch/brown_rga.txt tagged_browndata2.txt -N 2 -E 1000 -T 250 -F pairs -L tags | 
+| python gendata.py /scratch/brown_rga.txt tagged_browndata2.txt -N 2 -E 1000 -T 250 -F pairs -L tags | 0.2672506256703611   | 189.1507040289585 |
 | python gendata.py /scratch/brown_rga.txt tagged_browndata3.txt -N 2 -E 200  -T 50 -F pairs -L tags  | 0.26634615384615384  | 64.46660070570107 |
 | python gendata.py /scratch/brown_rga.txt tagged_browndata4.txt -N 3 -E 2000 -T 500 -F pairs -L tags |                                         
 | python gendata.py /scratch/brown_rga.txt tagged_browndata5.txt -N 3 -E 1000 -T 250 -F pairs -L tags |
