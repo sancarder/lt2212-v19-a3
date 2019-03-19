@@ -24,13 +24,13 @@ The accuracy measures were lower than I expected. But since logistic regression 
 
 | Command                                                                     | Accuracy             | Perplexity        |
 |-----------------------------------------------------------------------------|----------------------|-------------------|
-| python gendata.py /scratch/brown_rga.txt browndata1.txt -N 2 -E 600 -T 150  |                                         
+| python gendata.py /scratch/brown_rga.txt browndata1.txt -N 2 -E 600 -T 150  | 0.12077434267552731  | 463.2994515088634 |                                      
 | python gendata.py /scratch/brown_rga.txt browndata2.txt -N 2 -E 1000 -T 250 | 0.13369254083178986  | 649.0675311467971 |
 | python gendata.py /scratch/brown_rga.txt browndata3.txt -N 2 -E 200  -T 50  | 0.1144               | 211.6655519438415 |
-| python gendata.py /scratch/brown_rga.txt browndata4.txt -N 3 -E 600 -T 150  |                                         
+| python gendata.py /scratch/brown_rga.txt browndata4.txt -N 3 -E 600 -T 150  | 0.1274131274131274   | 464.34168359475194|                                        
 | python gendata.py /scratch/brown_rga.txt browndata5.txt -N 3 -E 1000 -T 250 | 0.131286394917946    | 660.4166947750257 |
 | python gendata.py /scratch/brown_rga.txt browndata6.txt -N 3 -E 200  -T 50  | 0.12172442941673711  | 218.9950553462103 |
-| python gendata.py /scratch/brown_rga.txt browndata7.txt -N 4 -E 600 -T 150  |                                         
+| python gendata.py /scratch/brown_rga.txt browndata7.txt -N 4 -E 600 -T 150  | 0.12828344532681735  | 473.56566937236374|                                        
 | python gendata.py /scratch/brown_rga.txt browndata8.txt -N 4 -E 1000 -T 250 | 0.13673253352152434  | 659.3543406562037 |                                        
 | python gendata.py /scratch/brown_rga.txt browndata9.txt -N 4 -E 200  -T 50  | 0.11129707112970712  | 214.31796164207617|                    
 
